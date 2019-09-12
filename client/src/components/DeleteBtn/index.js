@@ -1,6 +1,8 @@
 import React from "react";
 import "./style.css";
 
+// Delete button for SavedBooks page
+
 // The ...props means, spread all of the passed props onto this element
 // That way we don't have to define them all individually
 function DeleteBtn(props) {

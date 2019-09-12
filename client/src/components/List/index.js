@@ -17,7 +17,7 @@ import { Container, Row, Col } from "../Grid";
 export function List({ children }){
   return <ul className="list-group">{children}</ul>;
 }
-
+//lists items of information from api call?
 export function ListItem({
   title,
   author,

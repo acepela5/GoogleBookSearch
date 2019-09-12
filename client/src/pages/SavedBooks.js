@@ -8,6 +8,7 @@ import DeleteBtn from "../components/DeleteBtn";
 
 class SavedBooks extends Component {
   state = {
+    //empty array to put the savedBooks data
     book: []
   };
   // When this component mounts, grab the book with the _id of this.props.match.params.id
@@ -16,12 +17,14 @@ class SavedBooks extends Component {
    this.getSavedBooks()
   };
 
+  //get the id's of books that have been saved
   getSavedBooks = () =>{
     API.getBook(this.props.match.params.id)
     .then(res => this.setState({ books: res.data }))
     .catch(err => console.log(err));
   };
 
+  //delete a book from the database using its id
   handleBookDelete = id => {
     API.deleteBook(id).then(res => this.getSavedBooks());
   };
@@ -33,6 +36,7 @@ class SavedBooks extends Component {
           <Col size="md-12">
             <Jumbotron>
               <h1>
+                {/* receiving data from the database called book */}
                 {this.state.book.title} by {this.state.book.author}
               </h1>
             </Jumbotron>
@@ -53,6 +57,7 @@ class SavedBooks extends Component {
             </Jumbotron>
             {this.state.books.length ? (
               <List>
+                {/* map function in oreder to render all of the items in the database */}
                 {this.state.books.map(book => (
                   <ListItem key={book._id}>
                     <Link to={"/books/" + book._id}>
@@ -65,15 +70,17 @@ class SavedBooks extends Component {
                 ))}
               </List>
             ) : (
+              // if there are no books to display show the message below
               <h3>No Results to Display</h3>
             )}
           </Col>
         </Row>
-        <Row>
+        {/* link back to other page - may not need if link is in nav */}
+        {/* <Row>
           <Col size="md-2">
             <Link to="/">← Back to Authors</Link>
           </Col>
-        </Row>
+        </Row> */}
       </Container>
     );
   }

@@ -8,7 +8,9 @@ import {List, ListItem} from "../components/List";
 
 class Books extends Component {
   state = {
+    //empty array that will show data pulled from api call
     books: [],
+    //empty search query
     q: "",
     // title: "",
     // author: "",
@@ -34,6 +36,7 @@ class Books extends Component {
   //     .catch(err => console.log(err));
   // };
 
+  //user input changes the value to the searched term
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -41,6 +44,7 @@ class Books extends Component {
     });
   };
 
+  //use q(query) with user input and GET data from API
   getBooks = () =>{
     API.getBooks(this.state.q)
     .then(res =>
@@ -48,12 +52,15 @@ class Books extends Component {
         books: res.data
       })).catch(() =>
       this.setState({
+        //add API data to the empty array
         books: []
 
       })
       );
   };
 
+  //form submit is an event that only happens once
+  //when the form is submitted, getBooks function is called to get data
   handleFormSubmit = event => {
     event.preventDefault();
     // if (this.state.title && this.state.author) {
@@ -66,16 +73,16 @@ class Books extends Component {
     //     .catch(err => console.log(err));
     // }
 console.log("book to search: ", this.state)
-    API.getBooks(this.state.title)
-      .then(res => this.setState({ books: res.data }))
-      .catch(err => this.setState({books:[]}));
-// this.getBooks()
+    // API.getBooks(this.state.title)
+    //   .then(res => this.setState({ books: res.data }))
+    //   .catch(err => this.setState({books:[]}));
+this.getBooks()
   };
 
+  //function to save books - will display on SavedBooks page
 handleBookSave = id => {
   const book = this.state.books.find(book => book.id ===id)
-
-
+//saves the books info into the database
 API.saveBook({
   googleId: book.id,
   title: book.volumeInfo.title,
@@ -135,6 +142,7 @@ API.saveBook({
                   key={book.id}
                   title={book.infoLink.title}
                   Button={() => (
+                    //button will render dynamically for every result allowing user to save each book individually
                     <button 
                     onClick={() => this.handleBookSave(book.id)}
                     />
