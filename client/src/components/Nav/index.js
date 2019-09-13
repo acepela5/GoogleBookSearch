@@ -11,7 +11,7 @@ function Nav() {
         React Reading List
       </a>
       <a id="navLink" href="/SavedBooks">
-        Saved Books Here
+        Saved Books
       </a>
     </nav>
   );

@@ -1,0 +1,15 @@
+.jumbotron {
+    background-color: #050405;
+    background-image: url("/images/books.jpg");
+    background-size: 100%;
+    color: white;
+    /* Text Shadow from wpshout.com */
+    text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+        1px 1px 0 #000;
+    background-repeat: no-repeat;
+    
+    
+}

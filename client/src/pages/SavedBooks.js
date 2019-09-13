@@ -5,6 +5,7 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { List, ListItem } from "../components/List";
 import DeleteBtn from "../components/DeleteBtn";
+import Wrapper from "../components/Wrapper";
 
 class SavedBooks extends Component {
   state = {
@@ -31,17 +32,18 @@ class SavedBooks extends Component {
 
   render() {
     return (
+      <Wrapper>
       <Container fluid>
-        <Row>
-          <Col size="md-12">
-            <Jumbotron>
+        {/* <Row> */}
+          {/* <Col size="md-12"> */}
+            {/* <Jumbotron> */}
               <h1>
                 {/* receiving data from the database called book */}
-                {this.state.book.title} by {this.state.book.author}
+                {/* {this.state.book.title} by {this.state.book.author} */}
               </h1>
-            </Jumbotron>
-          </Col>
-        </Row>
+            {/* </Jumbotron> */}
+          {/* </Col> */}
+        {/* </Row> */}
         <Row>
           {/* <Col size="md-10 md-offset-1">
             <article>
@@ -54,7 +56,9 @@ class SavedBooks extends Component {
          <Col size="md-6 sm-12">
             <Jumbotron>
               <h1>Books On My List</h1>
-            </Jumbotron>
+              </Jumbotron>
+              </Col>
+              <Col size="md-6 sm-12">
             {this.state.book.length ? (
               <List>
                 {/* map function in oreder to render all of the items in the database */}
@@ -73,6 +77,8 @@ class SavedBooks extends Component {
               // if there are no books to display show the message below
               <h3>No Results to Display</h3>
             )}
+                        
+
           </Col>
         </Row>
         {/* link back to other page - may not need if link is in nav */}
@@ -82,6 +88,7 @@ class SavedBooks extends Component {
           </Col>
         </Row> */}
       </Container>
+      </Wrapper>
     );
   }
 }

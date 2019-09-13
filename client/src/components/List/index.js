@@ -21,7 +21,7 @@ export function List({ children }){
 export function ListItem({
   title,
   author,
-  synopsis,
+  description,
   date
 }) {
   return (
@@ -34,7 +34,7 @@ export function ListItem({
           <Col size="sm-9">
             <h3>{title}</h3>
             <strong>{author}</strong>
-            <p>{synopsis}</p>
+            <p>{description}</p>
             <strong>{date}</strong>
           </Col>
         </Row>

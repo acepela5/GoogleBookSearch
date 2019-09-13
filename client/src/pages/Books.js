@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
-import { Input} from "../components/Form";
+import { Input, FormBtn} from "../components/Form";
 import Button from "../components/Button";
 import {List, ListItem} from "../components/List";
+import Wrapper from "../components/Wrapper"
 
-// , TextArea , FormBtn 
+// , TextArea  
 class Books extends Component {
   state = {
     //empty array that will show data pulled from api call
@@ -92,6 +93,7 @@ API.saveBook({
 
   render() {
     return (
+      <Wrapper>
       <Container fluid>
         <Row>
           <Col size="md-6">
@@ -117,13 +119,13 @@ API.saveBook({
                 onChange={this.handleInputChange}
                 name="synopsis"
                 placeholder="Synopsis (Optional)"
-              /> 
+              /> */}
               <FormBtn
                 enabled={!(this.state.author && this.state.q)}
                 onClick={this.handleFormSubmit}
-              > */}
+              > 
                 Submit Book
-              {/* </FormBtn>  */}
+              </FormBtn> 
               <Button onClick={this.handleFormSubmit}
                 // handleInputChange
                 // value
@@ -133,9 +135,9 @@ API.saveBook({
             </form>
           </Col>
           <Col size="md-6 sm-12">
-            <Jumbotron>
+            {/* <Jumbotron>
               <h1>Books On My List</h1>
-            </Jumbotron>
+            </Jumbotron> */}
             {this.state.books.length ? (
               <List>
                 {this.state.books.map(book => (
@@ -160,6 +162,7 @@ API.saveBook({
           </Col>
         </Row>
       </Container>
+      </Wrapper>
     );
   }
 }
