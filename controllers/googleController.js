@@ -10,8 +10,9 @@ module.exports = {
     console.log("findAll:", params)
     axios
       .get("https://www.googleapis.com/books/v1/volumes", {
-        params
-      }).then(results =>{
+        params: req.query
+       })
+    .then(results =>{
         //hold on to results from these specific conditions
      console.log(results.data.items)
         results.data.items.filter(
@@ -23,9 +24,10 @@ module.exports = {
           result.volumeInfo.imageLinks &&
           result.volumeInfo.imageLinks.thumbnail
     
-    )}
-      ).then(apiBooks =>{
-     console.log("apiBooks", apiBooks)
+    )} 
+    )
+    .then(apiBooks =>{
+     console.log("^^^^^^^^^^^^^^^apiBooks^^^^^^^^^^^^^^^^^^^", apiBooks)
         db.Book.find().then(dbBooks =>
             apiBooks.filter(apiBook =>
                 dbBooks.every(dbBook => dbBook.googleId.toString() !==

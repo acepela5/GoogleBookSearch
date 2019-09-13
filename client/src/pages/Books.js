@@ -2,20 +2,17 @@ import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
-import { Input } from "../components/Form";
+import { Input} from "../components/Form";
 import Button from "../components/Button";
 import {List, ListItem} from "../components/List";
 
+// , TextArea , FormBtn 
 class Books extends Component {
   state = {
     //empty array that will show data pulled from api call
     books: [],
     //empty search query
     q: "",
-    // title: "",
-    // author: "",
-    // synopsis: "",
-    // bookSearch: ""
   };
 
   // componentDidMount() {
@@ -73,10 +70,10 @@ class Books extends Component {
     //     .catch(err => console.log(err));
     // }
 console.log("book to search: ", this.state)
-    // API.getBooks(this.state.title)
-    //   .then(res => this.setState({ books: res.data }))
-    //   .catch(err => this.setState({books:[]}));
-this.getBooks()
+    API.getBooks(this.state.q)
+      .then(res => this.setState({ books: res.data }))
+      // .catch(err => this.setState({books:[]}));
+    .catch(err => console.log(err))
   };
 
   //function to save books - will display on SavedBooks page
@@ -103,33 +100,33 @@ API.saveBook({
             </Jumbotron>
             <form>
               <Input
-               handleInputChange={this.handleInputChange}
-               handleFormSubmit={this.handleFormSubmit}
-               q={this.state.q}
+               name="q"
+               value={this.state.q}
+               onChange={this.handleInputChange}
+               placeholder="Search for book"
 
                //add onChange function
               />
               {/* <Input
-                value={this.state.author}
+                value={this.state.q}
                 onChange={this.handleInputChange}
-                name="author"
-                placeholder="Author (required)"
-              />
-              <TextArea
+                name = "title"
+              /> */}
+              {/* <TextArea
                 value={this.state.synopsis}
                 onChange={this.handleInputChange}
                 name="synopsis"
                 placeholder="Synopsis (Optional)"
-              /> */}
-              {/* <FormBtn
-                enabled={!(this.state.author && this.state.title)}
+              /> 
+              <FormBtn
+                enabled={!(this.state.author && this.state.q)}
                 onClick={this.handleFormSubmit}
-              >
+              > */}
                 Submit Book
-              </FormBtn> */}
+              {/* </FormBtn>  */}
               <Button onClick={this.handleFormSubmit}
-                handleInputChange
-                value
+                // handleInputChange
+                // value
               type="success"
               className="input-lg">Second Search BTN
               </Button>
@@ -145,6 +142,7 @@ API.saveBook({
                   <ListItem 
                   key={book.id}
                   title={book.infoLink.title}
+                  description={book.infoLink.description}
                   Button={() => (
                     //button will render dynamically for every result allowing user to save each book individually
                     <button 
