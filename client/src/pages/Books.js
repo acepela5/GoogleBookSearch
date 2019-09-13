@@ -106,6 +106,8 @@ API.saveBook({
                handleInputChange={this.handleInputChange}
                handleFormSubmit={this.handleFormSubmit}
                q={this.state.q}
+
+               //add onChange function
               />
               {/* <Input
                 value={this.state.author}
@@ -126,6 +128,8 @@ API.saveBook({
                 Submit Book
               </FormBtn> */}
               <Button onClick={this.handleFormSubmit}
+                handleInputChange
+                value
               type="success"
               className="input-lg">Second Search BTN
               </Button>

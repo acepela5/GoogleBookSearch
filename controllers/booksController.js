@@ -34,12 +34,12 @@ module.exports = {
   },
 
   //will not need to update info (?)
-  // update: function(req, res) {
-  //   db.Book
-  //     .findOneAndUpdate({ _id: req.params.id }, req.body)
-  //     .then(dbBook => res.json(dbBook))
-  //     .catch(err => res.status(422).json(err));
-  // },
+  update: function(req, res) {
+    db.Book
+      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .then(dbBook => res.json(dbBook))
+      .catch(err => res.status(422).json(err));
+  },
 
   //delete data entry by id
   remove: function(req, res) {
