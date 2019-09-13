@@ -10,7 +10,7 @@ function Nav() {
       <a className="navbar-brand" href="/">
         React Reading List
       </a>
-      <a id="navLink" href="/SavedBooks.js">
+      <a id="navLink" href="/SavedBooks">
         Saved Books Here
       </a>
     </nav>

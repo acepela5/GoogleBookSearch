@@ -19,7 +19,7 @@ class SavedBooks extends Component {
 
   //get the id's of books that have been saved
   getSavedBooks = () =>{
-    API.getBook(this.props.match.params.id)
+    API.getSavedBooks(this.props.match.params.id)
     .then(res => this.setState({ books: res.data }))
     .catch(err => console.log(err));
   };
@@ -55,7 +55,7 @@ class SavedBooks extends Component {
             <Jumbotron>
               <h1>Books On My List</h1>
             </Jumbotron>
-            {this.state.books.length ? (
+            {this.state.book.length ? (
               <List>
                 {/* map function in oreder to render all of the items in the database */}
                 {this.state.books.map(book => (

@@ -23,24 +23,26 @@ module.exports = {
           result.volumeInfo.description &&
           result.volumeInfo.imageLinks &&
           result.volumeInfo.imageLinks.thumbnail
-    
-    )} 
+          
     )
-    .then(apiBooks =>{
-     console.log("^^^^^^^^^^^^^^^apiBooks^^^^^^^^^^^^^^^^^^^", apiBooks)
-        db.Book.find().then(dbBooks =>
-            apiBooks.filter(apiBook =>
-                dbBooks.every(dbBook => dbBook.googleId.toString() !==
-                apiBook.id)
-                )
-            )
-            })
-                .then(books => res.json(books))
-                .catch(err =>
-                    // console.log(err)
-                     res.status(422).json(err)
-                     );
+  console.log(result.volumeInfo.title, "***** BOOK TITLE ********")
+  } 
+    )
+//     .then(apiBooks =>{
+//      console.log("^^^^^^^^^^^^^^^apiBooks^^^^^^^^^^^^^^^^^^^", apiBooks)
+//         db.Book.find().then(dbBooks =>
+//             apiBooks.filter(apiBook =>
+//                 dbBooks.every(dbBook => dbBook.googleId.toString() !==
+//                 apiBook.id)
+//                 )
+//             )
+//             })
+//                 .then(books => res.json(books))
+//                 .catch(err =>
+//                     // console.log(err)
+//                      res.status(422).json(err)
+//                      );
                 
   }
 
-};
+ }
