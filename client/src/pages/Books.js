@@ -63,6 +63,7 @@ class Books extends Component {
 handleBookSave = id => {
   const book = this.state.books.find(book => book.id ===id)
 //saves the books info into the database
+console.log(book, "THIS IS BOOK***")
 API.saveBook({
   googleId: book.id,
   title: book.volumeInfo.title,
@@ -109,13 +110,13 @@ API.saveBook({
                     return (
                       <ListItem
                     
-                        key={book.volumeInfo.id}
+                        key={book.id}
                         title={book.volumeInfo.title}
                         href={book.volumeInfo.canonicalVolumeLink}
                         description={book.volumeInfo.description}
                         thumbnail={book.volumeInfo.imageLinks.thumbnail}>
                      
-                     <SaveButton onClick={() => this.saveBook(key)} />  
+                     <SaveButton onClick={() => this.handleBookSave(book.id)} />  
 
                         </ListItem>
                      
