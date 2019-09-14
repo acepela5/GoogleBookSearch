@@ -109,13 +109,13 @@ API.saveBook({
                     return (
                       <ListItem
                     
-                        key={book.volumeInfo.title}
+                        key={book.volumeInfo.id}
                         title={book.volumeInfo.title}
                         href={book.volumeInfo.canonicalVolumeLink}
                         description={book.volumeInfo.description}
                         thumbnail={book.volumeInfo.imageLinks.thumbnail}>
                      
-                     <SaveButton onClick={() => this.saveBook()} />  
+                     <SaveButton onClick={() => this.saveBook(key)} />  
 
                         </ListItem>
                      
