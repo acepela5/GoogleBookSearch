@@ -1,13 +1,14 @@
 .wrapper {
   padding-top: 50px;
-  background: #fbccd1;
+  background: white;
   min-height: 570px;
   display: flex;
   flex-flow: row wrap;
   padding: 20px;
   justify-content: space-around;
   align-content: flex-start;  
-  background-size: 100%;
+  background-size: 100% ;
+  /* background-image: url("/images/background.jpg"); */
 }
 
 

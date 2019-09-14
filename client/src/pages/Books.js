@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
-import { Input, FormBtn} from "../components/Form";
+import { Input} from "../components/Form";
 import Button from "../components/Button";
 import {List, ListItem} from "../components/List";
-import Wrapper from "../components/Wrapper"
+import Wrapper from "../components/Wrapper";
+import SaveButton from "../components/SaveButton";
 
-// , TextArea  
 class Books extends Component {
   state = {
     //empty array that will show data pulled from api call
@@ -16,23 +16,9 @@ class Books extends Component {
     q: "",
   };
 
-  // componentDidMount() {
-  //   this.loadBooks();
-  // }
-
-  // loadBooks = () => {
-  //   API.getBooks()
-  //     .then(res =>
-  //       this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
-
-  // deleteBook = id => {
-  //   API.deleteBook(id)
-  //     .then(res => this.loadBooks())
-  //     .catch(err => console.log(err));
-  // };
+  componentDidMount() {
+    this.getBooks();
+  }
 
   //user input changes the value to the searched term
   handleInputChange = event => {
@@ -45,15 +31,15 @@ class Books extends Component {
   //use q(query) with user input and GET data from API
   getBooks = () =>{
     API.getBooks(this.state.q)
-    .then(res =>
+    .then(res =>{
+     console.log("This is your books array:", this.state.books)
+
       this.setState({
         books: res.data
-      })).catch(() =>
-      this.setState({
-        //add API data to the empty array
-        books: []
-
       })
+      console.log("This is your books array:", this.state.books)
+    }).catch((err) => console.log(err)
+   
       );
   };
 
@@ -61,20 +47,16 @@ class Books extends Component {
   //when the form is submitted, getBooks function is called to get data
   handleFormSubmit = event => {
     event.preventDefault();
-    // if (this.state.title && this.state.author) {
-    //   API.saveBook({
-    //     title: this.state.title,
-    //     author: this.state.author,
-    //     synopsis: this.state.synopsis
-    //   })
-    //     .then(res => this.loadBooks())
-    //     .catch(err => console.log(err));
-    // }
-console.log("book to search: ", this.state)
-    API.getBooks(this.state.q)
-      .then(res => this.setState({ books: res.data }))
-      // .catch(err => this.setState({books:[]}));
-    .catch(err => console.log(err))
+  
+    if(!this.state.q){
+      alert("Please input a valid book title or author.")
+    } else{
+      console.log("book to search: ", this.state)
+
+    this.getBooks();
+    console.log("This is the q before API", this.state.q)
+    this.setState({q: ""})
+  }
   };
 
   //function to save books - will display on SavedBooks page
@@ -107,58 +89,44 @@ API.saveBook({
                onChange={this.handleInputChange}
                placeholder="Search for book"
 
-               //add onChange function
               />
-              {/* <Input
-                value={this.state.q}
-                onChange={this.handleInputChange}
-                name = "title"
-              /> */}
-              {/* <TextArea
-                value={this.state.synopsis}
-                onChange={this.handleInputChange}
-                name="synopsis"
-                placeholder="Synopsis (Optional)"
-              /> */}
-              <FormBtn
-                enabled={!(this.state.author && this.state.q)}
-                onClick={this.handleFormSubmit}
-              > 
-                Submit Book
-              </FormBtn> 
+             
+            
               <Button onClick={this.handleFormSubmit}
-                // handleInputChange
-                // value
+               
               type="success"
               className="input-lg">Second Search BTN
               </Button>
             </form>
           </Col>
           <Col size="md-6 sm-12">
-            {/* <Jumbotron>
-              <h1>Books On My List</h1>
-            </Jumbotron> */}
-            {this.state.books.length ? (
-              <List>
-                {this.state.books.map(book => (
-                  <ListItem 
-                  key={book.id}
-                  title={book.infoLink.title}
-                  description={book.infoLink.description}
-                  Button={() => (
-                    //button will render dynamically for every result allowing user to save each book individually
-                    <button 
-                    onClick={() => this.handleBookSave(book.id)}
-                    />
-                  )}
-                  >
-                   
-                  </ListItem>
-                ))}
-              </List>
+           
+            {!this.state.books.length ? (
+              <h1 className="text-center"> No Books Showing</h1>
             ) : (
-              <h3>No Results to Display</h3>
-            )}
+              <List>
+                  {this.state.books.map(book => {
+                    return (
+                      <ListItem
+                    
+                        key={book.volumeInfo.title}
+                        title={book.volumeInfo.title}
+                        href={book.volumeInfo.canonicalVolumeLink}
+                        description={book.volumeInfo.description}
+                        thumbnail={book.volumeInfo.imageLinks.thumbnail}>
+                     
+                     <SaveButton onClick={() => this.saveBook()} />  
+
+                        </ListItem>
+                     
+
+                      );
+
+                  })}
+
+                </List>
+              )}
+
           </Col>
         </Row>
       </Container>

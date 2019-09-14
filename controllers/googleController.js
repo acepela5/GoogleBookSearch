@@ -14,8 +14,8 @@ module.exports = {
        })
     .then(results =>{
         //hold on to results from these specific conditions
-     console.log(results.data.items)
-        results.data.items.filter(
+     console.log(results.data.items, "*********************************")
+      return  results.data.items.filter(
           result => 
           result.volumeInfo.title &&
           result.volumeInfo.infoLink &&
@@ -25,9 +25,8 @@ module.exports = {
           result.volumeInfo.imageLinks.thumbnail
           
     )
-  console.log(result.volumeInfo.title, "***** BOOK TITLE ********")
   } 
-    )
+    ).then (books => res.json(books))
 //     .then(apiBooks =>{
 //      console.log("^^^^^^^^^^^^^^^apiBooks^^^^^^^^^^^^^^^^^^^", apiBooks)
 //         db.Book.find().then(dbBooks =>
