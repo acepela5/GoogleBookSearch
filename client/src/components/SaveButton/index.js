@@ -1,9 +1,10 @@
 import React from "react";
+import "./style.css"
 //button to submit user input - send to api
 function SaveButton(props) {
     return (
-        <button className="save-btn" {...props} role="button" tabIndex="0">
-        &#x2605;
+        <button id="saveBtn" className="save-btn" {...props} role="button" tabIndex="0">
+        <strong>&#10032;</strong>
       </button>
     );
 }
