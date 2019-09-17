@@ -65,10 +65,10 @@ handleBookSave = id => {
 //saves the books info into the database
 console.log(book, "THIS IS handle BOOK*s*a*v*e")
 API.saveBook({
-  googleId: book.id,
+  key: book.id,
   title: book.volumeInfo.title,
   href: book.volumeInfo.canonicalVolumeLink,
-  authors: book.volumeInfo.authors,
+  // authors: book.volumeInfo.authors,
   description: book.volumeInfo.description,
   image: book.volumeInfo.imageLinks.thumbnail
 }).then(() => this.getSavedBooks());

@@ -8,8 +8,9 @@ export default {
     return axios.get("/api/google", { params: { q: q } });
   },
   // Gets the book with the given id
-  getSavedBooks: function() {
-    return axios.get("/api/books/");
+  getSavedBooks: function(bookData) {
+    console.log("WE ARE GETING SAVED BOOKS", bookData)
+    return axios.get("/api/books/", bookData);
   },
   // Deletes the book with the given id
   deleteBook: function(id) {
@@ -17,6 +18,7 @@ export default {
   },
   // Saves a book to the database
   saveBook: function(bookData) {
+    console.log("WE ARE SAVING ALL THESE BOOKS", bookData)
     return axios.post("/api/books", bookData);
   }
 };
