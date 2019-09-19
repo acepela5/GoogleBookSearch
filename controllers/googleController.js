@@ -14,7 +14,6 @@ module.exports = {
        })
     .then(results =>{
         //hold on to results from these specific conditions
-     console.log(results.data.items, "*********************************")
       return  results.data.items.filter(
           result => 
           result.volumeInfo.title &&
@@ -24,24 +23,10 @@ module.exports = {
           result.volumeInfo.imageLinks &&
           result.volumeInfo.imageLinks.thumbnail
           
-    )
-  } 
+        )
+      } 
     ).then (books => res.json(books))
-//     .then(apiBooks =>{
-//      console.log("^^^^^^^^^^^^^^^apiBooks^^^^^^^^^^^^^^^^^^^", apiBooks)
-//         db.Book.find().then(dbBooks =>
-//             apiBooks.filter(apiBook =>
-//                 dbBooks.every(dbBook => dbBook.googleId.toString() !==
-//                 apiBook.id)
-//                 )
-//             )
-//             })
-//                 .then(books => res.json(books))
-//                 .catch(err =>
-//                     // console.log(err)
-//                      res.status(422).json(err)
-//                      );
-                
-  }
 
  }
+
+}

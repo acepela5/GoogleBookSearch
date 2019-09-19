@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-//might not need Jumbotron - will see in the future
+
 function Jumbotron({ children }) {
   return (
     <div

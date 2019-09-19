@@ -32,15 +32,12 @@ class Books extends Component {
   getBooks = () =>{
     API.getBooks(this.state.q)
     .then(res =>{
-     console.log("This is your books array:", this.state.books)
-
       this.setState({
         books: res.data
       })
-      console.log("This is your books array:", this.state.books)
-    }).catch((err) => console.log(err)
-   
-      );
+    })
+    .catch((err) => console.log(err)
+    );
   };
 
   //form submit is an event that only happens once
@@ -50,88 +47,84 @@ class Books extends Component {
   
     if(!this.state.q){
       alert("Please input a valid book title or author.")
-    } else{
-      console.log("book to search: ", this.state)
+    } 
+    else{
 
     this.getBooks();
-    console.log("This is the q before API", this.state.q)
     this.setState({q: ""})
-  }
+    }
   };
 
   //function to save books - will display on SavedBooks page
-handleBookSave = id => {
-  const book = this.state.books.find(book => book.id ===id)
-//saves the books info into the database
-console.log(book, "THIS IS handle BOOK*s*a*v*e")
-API.saveBook({
-  key: book.id,
-  title: book.volumeInfo.title,
-  href: book.volumeInfo.canonicalVolumeLink,
-  // authors: book.volumeInfo.authors,
-  description: book.volumeInfo.description,
-  image: book.volumeInfo.imageLinks.thumbnail
-}).then(() => this.getSavedBooks());
-}
+  handleBookSave = id => {
+    const book = this.state.books.find(book => book.id ===id)
+  //saves the books info into the database
+    API.saveBook({
+      key: book.id,
+      title: book.volumeInfo.title,
+      image: book.volumeInfo.imageLinks.thumbnail,
+      description: book.volumeInfo.description,
+      href: book.volumeInfo.canonicalVolumeLink,
+  
+    })
+    .then(() => API.getSavedBooks());
+  }
 
   render() {
     return (
       <Wrapper>
-      <Container fluid>
-        <Row>
-          <Col size="md-6">
-            <Jumbotron>
-              <h1>What Books Should I Read?</h1>
-            </Jumbotron>
-            <form>
-              <Input
-               name="q"
-               value={this.state.q}
-               onChange={this.handleInputChange}
-               placeholder="Search for book"
-
-              />
+        <Container fluid>
+          <Row>
+            <Col size="md-6">
+              <Jumbotron>
+                <h1>What Books Should I Read?</h1>
+              </Jumbotron>
+              
+              <form>
+                <Input
+                  name="q"
+                  value={this.state.q}
+                  onChange={this.handleInputChange}
+                  placeholder="Search for book"
+                />
              
-            
-              <Button onClick={this.handleFormSubmit}
-               
-              type="success"
-              className="input-lg">Second Search BTN
-              </Button>
-            </form>
-          </Col>
-          <Col size="md-6 sm-12">
-           
+                <Button onClick={this.handleFormSubmit}          
+                  type="success"
+                  className="input-lg">Search
+                </Button>
+              </form>
+            </Col>
+
+            <Col size="md-6 sm-12">
+
             {!this.state.books.length ? (
               <h1 className="text-center"> No Books Showing</h1>
-            ) : (
+                ) : (
               <List>
-                  {this.state.books.map(book => {
-                    return (
-                      <ListItem
+                {this.state.books.map(book => {
+                  return (
+                    <ListItem
                     
-                        key={book.id}
-                        title={book.volumeInfo.title}
-                        href={book.volumeInfo.canonicalVolumeLink}
-                        description={book.volumeInfo.description}
-                        thumbnail={book.volumeInfo.imageLinks.thumbnail}>
+                      key={book.id}
+                      title={book.volumeInfo.title}
+                      href={book.volumeInfo.canonicalVolumeLink}
+                      description={book.volumeInfo.description}
+                      thumbnail={book.volumeInfo.imageLinks.thumbnail}>
                      
-                     <SaveButton onClick={() => this.handleBookSave(book.id) + console.log(book.id,"BOOK ID %%%%%%%%%")} />  
+                      <SaveButton onClick={() => this.handleBookSave(book.id) + alert("Your book has been saved!")} />  
 
-                        </ListItem>
+                     </ListItem>
                      
+                         );
+                })}
 
-                      );
-
-                  })}
-
-                </List>
+              </List>
               )}
 
           </Col>
-        </Row>
+          </Row>
       </Container>
-      </Wrapper>
+    </Wrapper>
     );
   }
 }

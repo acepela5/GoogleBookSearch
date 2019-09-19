@@ -6,15 +6,9 @@ const db = require("../models");
 module.exports = {
   findAll: function(req, res) {
     db.Book.find(req.query)
-    
-      .then(dbBook => res.json(dbBook)
-        ).catch(err => res.status(422).json(err));
-    
-    // db.Book
-    //   .find(req.query)
-    //   .sort({ date: -1 })
-    //   .then(dbBook => res.json(dbBook))
-    //   .catch(err => res.status(422).json(err));
+      .then(dbBook => 
+        {res.json(dbBook)})
+      .catch(err => res.status(422).json(err));
   },
 
   //find books by id
